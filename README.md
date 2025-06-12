@@ -11,8 +11,7 @@ Gunakan [`CompileDaemon`](https://github.com/githubnemo/CompileDaemon) agar apli
 ### 📌 API Endpoints
 🔐POST /register
 
-🔑 Login
-POST /login
+🔑POST /login
 
 #### 📦 Install CompileDaemon
 
