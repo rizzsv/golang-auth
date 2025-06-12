@@ -11,30 +11,9 @@ Gunakan [`CompileDaemon`](https://github.com/githubnemo/CompileDaemon) agar apli
 ### 📌 API Endpoints
 Register
 🔐POST /register
-• Request Body:
-{
-  "username": "johndoe",
-  "email": "john@example.com",
-  "password": "secret123"
-}
-
-• Response 201:
-{
-  "message": "User created successfully"
-}
 
 🔑 Login
 POST /login
-• Request Body:
-{
-  "email": "john@example.com",
-  "password": "secret123"
-}
-
-• Response 201: 
-{
-  "token": "your-jwt-token"
-}
 
 #### 📦 Install CompileDaemon
 
