@@ -14,6 +14,18 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+type SignupInput struct {
+	Email    string `json:"email" binding:"required,email"`
+	Username string `json:"username" binding:"required,min=3"`
+	Password string `json:"password" binding:"required,min=6"`
+}
+
+type SignUpResponse struct {
+	Message  string `json:"message"`
+	Username string `json:"username"`
+	Email    string `json:"email"`
+}
+
 type LoginResponse struct {
 	Message  string `json:"message"`
 	Username string `json:"username"`
@@ -22,21 +34,14 @@ type LoginResponse struct {
 }
 
 func Signup(c *gin.Context) {
-	var body struct {
-		Email    string `json:"email"`
-		Username string `json:"username"`
-		Password string `json:"password"`
-	}
-
-	if c.BindJSON(&body) != nil {
-		c.JSON(http.StatusBadRequest, gin.H{
-			"error": "Failed to read body",
-		})
+	var input SignupInput
+	if err := c.ShouldBindJSON(&input); err!= nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
 	// Hash password
-	hash, err := bcrypt.GenerateFromPassword([]byte(body.Password), 10)
+	hash, err := bcrypt.GenerateFromPassword([]byte(input.Password), 10)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
 			"error": "Failed to hash password",
@@ -46,8 +51,8 @@ func Signup(c *gin.Context) {
 
 	// Buat user object
 	user := models.User{
-		Email:    body.Email,
-		Username: body.Username,
+		Email:    input.Email,
+		Username: input.Username,
 		Password: string(hash),
 	}
 
@@ -65,8 +70,10 @@ func Signup(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"message": "User created successfully",
+	c.JSON(http.StatusOK, SignUpResponse{
+		Message:  "Signup successful",
+		Username: user.Username,
+		Email:    user.Email,
 	})
 }
 
