@@ -13,5 +13,9 @@ Gunakan [`CompileDaemon`](https://github.com/githubnemo/CompileDaemon) agar apli
 ```bash
 go install github.com/githubnemo/CompileDaemon@latest
 
-###  run project
+####  run project
 CompileDaemon --command="./golang-auth"
+
+##### 📌 API Endpoints
+
+
