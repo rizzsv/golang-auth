@@ -9,7 +9,6 @@ Sebuah project sederhana untuk implementasi autentikasi (register & login) mengg
 Gunakan [`CompileDaemon`](https://github.com/githubnemo/CompileDaemon) agar aplikasi otomatis restart saat ada perubahan:
 
 ### 📌 API Endpoints
-Register
 🔐POST /register
 
 🔑 Login
